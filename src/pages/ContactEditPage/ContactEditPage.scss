@@ -1,0 +1,26 @@
+.contact-edit {
+    display:flex;
+    flex-direction: column;
+    width: 350px;
+    align-items: center;
+    margin:60px auto;
+    >*:not(:last-child){
+        margin-bottom: 20px;
+    }
+    button,
+    input{
+        align-self: flex-end;
+        width: 250px;
+    }
+    // {
+    //     align-self: flex-end;
+    //     width: 100%;
+    // }
+    label{
+        width: 100%;
+        display:flex;
+        justify-content: space-between;
+        font-weight: bold;
+        align-items: center;
+    }
+}

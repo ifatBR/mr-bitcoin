@@ -1,0 +1,46 @@
+@import '../../scss/variables.scss';
+
+.contact-preview {
+    // background-color: rgba($clr1, 0.2);
+    background-color: rgba(35, 29, 48, 0.466);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding-top:20px;
+    position: relative;
+    cursor:pointer;
+    &:hover{
+        background-color: rgba(32, 3, 136, 0.0);
+        box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.1);
+        img{
+            filter:saturate(1);
+        mix-blend-mode:normal;
+
+        }
+        h2{
+            width:60%;
+        }
+    }
+    img{
+        width: 80%;    
+        filter:saturate(0.4) brightness(150%);
+        mix-blend-mode:multiply
+        
+    }
+    h2{
+        position:absolute;
+        word-spacing:100px;
+        width: 50px;
+        padding:5px;
+        background-color: rgb(233, 162, 10);
+        color:white;
+        bottom:15px;
+        margin:0;
+        left:10px;
+        transition:0.2s;
+        text-align: left;
+        text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
+        border-radius: 3px;    }
+}
