@@ -1,17 +1,12 @@
 import { Component } from 'react';
 import contactService from '../../services/contactService';
-import { Link } from 'react-router-dom';
-
 import './ContactEditPage.scss';
 
 export class ContactEditPage extends Component {
     state = {
         contact: null,
     };
-    // contactId = '5a566402abb3146207bc4ec5';
-    contactId = null;
     componentDidMount() {
-        //Todo: check if there is id in the route
         if (this.props.match.params.id) this.setContact();
         else this.setState({ contact: contactService.getEmptyContact() });
     }
@@ -21,17 +16,15 @@ export class ContactEditPage extends Component {
     };
 
     onHandleChange = ({ target }) => {
-        const contact = { ...this.state.contact };
-        console.log('contact:');
-        contact[target.name] = target.value;
-        this.setState({ contact });
+        const field=target.name;
+        const value = target.value;
+        this.setState({ contact:{...this.state.contact, [field]:value} });
     };
 
     onSaveContact = (ev) => {
         ev.preventDefault();
         contactService.saveContact(this.state.contact);
         this.props.history.push(this.props.match.params.id? '/contact/'+this.props.match.params.id: '/contact/')
-
     };
 
     onCloseContact = () => {
@@ -43,9 +36,9 @@ export class ContactEditPage extends Component {
         return (
             contact && (
                 <form onSubmit={this.onSaveContact} className="contact-edit">
-                      <Link to={this.props.match.params.id? '/contact/'+this.props.match.params.id: '/contact/'} className="btn standard back">
+                      <button onClick={()=>this.props.history.goBack()} className="btn standard back">
                         ← Back
-                    </Link>
+                    </button>
                     <label htmlFor="name">
                         Name:
                         <input type="text" value={contact.name} id="name" name="name" onChange={this.onHandleChange} required />

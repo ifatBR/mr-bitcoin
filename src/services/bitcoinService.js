@@ -23,7 +23,6 @@ async function getMarketPrice() {
         const res = await axios.get('https://api.blockchain.info/charts/market-price?timespan=5months&format=json&cors=true');
         storageService.store('MarketPrice', res.data)
         return res.data;
-        // return({values:[1,2,3]})
     } catch (err) {
         throw err;
     }
@@ -35,7 +34,6 @@ async function getConfirmedTransactions() {
         const res = await axios.get('https://api.blockchain.info/charts/transactions-per-second?timespan=5weeks&rollingAverage=8hours&format=json&cors=true');
         storageService.store('getConfirmedTransactions', res.data)
         return res.data;
-        // return({values:[1,2,3]})
 
     } catch (err) {
         throw err;

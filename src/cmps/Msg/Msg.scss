@@ -1,0 +1,24 @@
+.msg {
+    position: Absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.411);
+
+    .msg-box {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 2px 2px 7px rgba(19, 2, 80, 0.253);
+        max-width: 300px;
+        background-color: rgb(250, 250, 250);
+
+        button:not(:last-of-type) {
+            margin-inline-end: 10px;
+        }
+    }
+}
