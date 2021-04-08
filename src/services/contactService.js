@@ -151,7 +151,10 @@ function getContacts(filterBy = null) {
 
 function getContactById(id) {
   return new Promise((resolve, reject) => {
-    const contact = contacts.find(contact => contact._id === id)
+    const contactIdx = contacts.findIndex(contact => contact._id === id)
+    const contact = contacts[contactIdx];
+    const neighborContacts = _getNeighborContactIds(contactIdx);
+    contact.neighborContacts = neighborContacts;
     contact ? resolve(contact) : reject(`Contact id ${id} not found!`)
   })
 }
@@ -165,6 +168,13 @@ function deleteContact(id) {
 
     resolve(contacts)
   })
+}
+function _getNeighborContactIds(contactIdx){
+  let prevIdx = contactIdx-1;
+  let nextIdx = contactIdx+1;
+  if(prevIdx<0) prevIdx = contacts.length-1;
+  else if(nextIdx>=contacts.length) nextIdx = 0;
+  return {prev:contacts[prevIdx]._id,next:contacts[nextIdx]._id}
 }
 
 function _updateContact(contact) {

@@ -16,8 +16,12 @@ export class ContactList extends Component {
     }
 
     loadContacts = async (filter = null) => {
-        const contacts = await contactService.getContacts(filter);
-        this.setState({ contacts });
+        try{
+            const contacts = await contactService.getContacts(filter);
+            this.setState({ contacts });
+        }catch(err){
+            this.props.setErrMsg('Could not load contact details')
+        }
     };
 
     onChangeFilter = (filter) => {

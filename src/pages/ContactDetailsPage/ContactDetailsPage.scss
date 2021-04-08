@@ -1,12 +1,14 @@
 .contact-detail-page {
-    width: 350px;
     margin: auto;
+    width: 350px;
+}
+.contact-detail-container {
     padding: 30px;
     display: flex;
     flex-direction: column;
     border-radius: 5px;
     box-shadow: 2px 2px 7px rgba(19, 2, 80, 0.253);
-
+    margin-bottom: 20px;;
     img {
         width: 100%;
         margin: auto;
@@ -35,7 +37,19 @@
             margin: auto;
         }
     }
-
-    
-
+}
+.paging{
+    display:flex;
+    justify-content: center;
+    a{
+        text-decoration: none;
+        color: rgb(47, 47, 49);
+        font-weight:bold;
+        &:not(:last-of-type){
+            margin-inline-end: 20px;;
+        }
+        &:hover{
+            color:rgb(92, 92, 92);
+        }
+    }    
 }

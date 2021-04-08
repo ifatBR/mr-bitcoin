@@ -12,7 +12,11 @@ export class ContactEditPage extends Component {
     }
 
     setContact = async () => {
-        this.setState({ contact: await contactService.getContactById(this.props.match.params.id) });
+        try{
+            this.setState({ contact: await contactService.getContactById(this.props.match.params.id) });
+        }catch(err){
+            this.props.setErrMsg('Could not load contact details')
+        }
     };
 
     onHandleChange = ({ target }) => {

@@ -22,7 +22,7 @@
             color: rgb(241, 241, 241);
         }
         .logo span {
-            color: rgb(233, 162, 10);
+            color: $clr2;
         }
 
     }
@@ -35,7 +35,7 @@
         // color: rgb(255, 232, 182);
         
         span {
-            color: rgb(233, 162, 10);
+            color: $clr2;
             // color: rgb(241, 241, 241);
         }
     }
@@ -62,7 +62,7 @@
 
             &:hover {
                 // background-color: rgba(6, 1, 26, 0.6);
-                color: rgb(233, 162, 10);
+                color: $clr2;
             }
         }
         .nav-link.home::before{

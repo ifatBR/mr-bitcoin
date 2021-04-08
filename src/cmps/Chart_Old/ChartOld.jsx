@@ -1,6 +1,6 @@
 import { Sparklines, SparklinesLine, SparklinesNormalBand, SparklinesSpots } from 'react-sparklines';
 import './Chart.scss';
-export function Chart({ data, title }) {
+export function ChartOld({ data, title }) {
     return (
         data && (
             <div className="chart">

@@ -1,5 +1,5 @@
 {
-  "homepage":"http://ifatBR.github.io/mr-bitcoin",
+  "homepage": "http://ifatBR.github.io/mr-bitcoin",
   "name": "mr-bitcoin-ifat",
   "version": "0.1.0",
   "private": true,
@@ -7,9 +7,11 @@
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^12.8.3",
+    "apexcharts": "^3.26.0",
     "axios": "^0.21.1",
     "node-sass": "^5.0.0",
     "react": "^17.0.2",
+    "react-apexcharts": "^1.3.7",
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",

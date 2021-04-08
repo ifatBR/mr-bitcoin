@@ -35,7 +35,7 @@ export class HomePage extends Component {
                             Coins: <span>{user.coins}</span>
                         </h3>
                         <h3>
-                            Rate: <span>${rate}</span>
+                            Rate: <span>{rate}</span>
                         </h3>
                     </div>
                 </div>
