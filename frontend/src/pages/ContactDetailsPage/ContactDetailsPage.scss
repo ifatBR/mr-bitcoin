@@ -1,20 +1,40 @@
 @import '../../scss/variables.scss';
+@import '../../scss/mixins.scss';
 
-.contact-main-container{
+@include for-mobile-layout {
+
+    .contact-detail-page {
+        padding-top: 20px;
+    }
+}
+
+.contact-main-container {
     width: 100%;
-    display:grid;
+    display: grid;
     grid-template-columns: 1fr 350px 1fr;
 
-}
-.contact-detail-container {
-    grid-column:2/3;
+    @include for-mobile-layout {
+        display: flex;
+        flex-direction: column;
 
+        >* {
+            width: 300px;
+            margin: auto;
+        }
+
+    }
+
+}
+
+.contact-detail-container {
+    grid-column: 2/3;
     display: flex;
     flex-direction: column;
     padding: 30px;
     border-radius: 5px;
     box-shadow: 2px 2px 7px rgba(19, 2, 80, 0.253);
     margin-bottom: 20px;
+
     img {
         width: 100%;
         margin: auto;
@@ -42,42 +62,61 @@
             margin: auto;
         }
     }
+
+    @include for-mobile-layout {
+        h3{
+            font-size: 1rem;;
+        }
+    }
 }
 
-.transfer-container{
-    grid-column:3/4;
-    display:flex;
+.transfer-container {
+    grid-column: 3/4;
+    display: flex;
     flex-direction: column;
-    margin:0 auto;
-    >*{
+    margin: 0 auto;
+
+    >* {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        width: 400px;
         padding: 30px;
         border-radius: 5px;
         box-shadow: 2px 2px 7px rgba(19, 2, 80, 0.253);
-        margin-bottom:20px;
-        h3{
-            margin-top:0;
+        margin-bottom: 20px;
+
+        h3 {
+            margin-top: 0;
         }
     }
-    .move-list{
+
+    .move-list {
         flex-grow: 1;
     }
+
+    @include for-mobile-layout {
+        >* {
+            width: 100%;
+        }
+    }
 }
-.paging{
-    display:flex;
+
+.paging {
+    display: flex;
     justify-content: center;
-    a{
+
+    a {
         text-decoration: none;
         color: $clr4;
-        font-weight:bold;
-        &:not(:last-of-type){
-            margin-inline-end: 20px;;
+        font-weight: bold;
+
+        &:not(:last-of-type) {
+            margin-inline-end: 20px;
+            ;
         }
-        &:hover{
-            color:rgb(92, 92, 92);
+
+        &:hover {
+            color: rgb(92, 92, 92);
         }
-    }    
+    }
 }

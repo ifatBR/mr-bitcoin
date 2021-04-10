@@ -33,22 +33,3 @@ const mapStateToProps = (state) => {
 
 
 export const HomePage = connect(mapStateToProps)(_HomePage);
-
-
-
-
-
-// import { connect } from 'react-redux';
-// // import {getUser } from '../../store/actions/userActions';
-
-// const mapStateToProps = (state) => {
-//     return {
-//         user: state.userReducer.user,
-//     };
-// };
-
-// const mapDispatchToProps = {
-//     // getUser,
-// };
-
-// export const HomePage = connect(mapStateToProps, mapDispatchToProps)(_HomePage);

@@ -1,26 +1,33 @@
+@import '../../scss/mixins.scss';
+
+
 .contact-edit {
-    display:flex;
+    display: flex;
     flex-direction: column;
     width: 350px;
     align-items: center;
-    margin:60px auto;
-    >*:not(:last-child){
+    margin: 60px auto;
+
+    >*:not(:last-child) {
         margin-bottom: 20px;
     }
+
     button,
-    input{
+    input {
         align-self: flex-end;
         width: 250px;
     }
-    // {
-    //     align-self: flex-end;
-    //     width: 100%;
-    // }
-    label{
+
+    label {
         width: 100%;
-        display:flex;
+        display: flex;
         justify-content: space-between;
         font-weight: bold;
         align-items: center;
+    }
+
+    @include for-mobile-layout {
+
+        width: 300px;
     }
 }

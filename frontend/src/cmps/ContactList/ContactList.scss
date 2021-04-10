@@ -1,3 +1,5 @@
+@import '../../scss/mixins.scss';
+
 .contact-list-container {
     width: fit-content;
     margin: auto;
@@ -6,14 +8,34 @@
         display: flex;
         justify-content: space-between;
         margin-bottom: 50px;
-
     }
 
     .contact-list {
         display: grid;
         grid-template-columns: repeat(4, 250px);
-        grid-auto-rows: 250px;
+        grid-auto-rows: 300px;
         gap: 10px;
         width: fit-content;
+    }
+    @include for-mobile-layout{
+        width: 300px;
+        .contact-list {
+            grid-template-columns: 300px;
+            gap: 10px;
+            margin:auto;
+        }
+        .contact-ctrls {    
+            width: 300px;
+            display:flex;
+            // flex-direction: column;
+        }
+        .contact-filter{
+            width: fit-content;
+            text-align: end;
+            input{
+                width: 150px;
+                margin-top:5px;
+            }
+        }
     }
 }

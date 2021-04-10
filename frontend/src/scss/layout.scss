@@ -1,0 +1,13 @@
+
+    @include for-narrow-layout {
+      width: calc(100vw - 50px);
+      margin: 0 auto;
+    }
+    @include for-normal-layout {
+      width: calc(100vw - 250px);
+    }
+    @include for-wide-layout {
+      width: calc(100vw - 650px);
+    }
+  
+

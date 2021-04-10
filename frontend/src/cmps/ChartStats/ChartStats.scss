@@ -1,4 +1,14 @@
-.chart-stats{
-    padding-top:30px;
+@import '../../scss/mixins.scss';
+
+.chart-stats {
+    padding-top: 30px;
+
     margin-bottom:100px;
+    @include for-mobile-layout {
+
+        margin-bottom: 20px;
+        h2{
+            font-size: 1.1rem;;
+        }
+    }
 }

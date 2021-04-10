@@ -15,9 +15,9 @@ export class _ContactDetailsPage extends Component {
         moves:null
     };
 
-    componentDidMount() {
-        console.log('details too!');
-        this.props.loadContact(this.props.match.params.id);
+    async componentDidMount() {
+        console.log('reloading');
+        await this.props.loadContact(this.props.match.params.id);
         this.setMoves();
     }
     async componentDidUpdate(prevProps) {
@@ -63,6 +63,9 @@ export class _ContactDetailsPage extends Component {
     render() {
         const { isShowMsg, amount } = this.state;
         const { contact } = this.props;
+        if(!contact) return(
+            <img className="loader" src="https://i.pinimg.com/originals/b3/30/0a/b3300a501c0897d36683d6f6d0b000a5.gif" alt="Loading"></img>
+        )
         return (
             contact && (
                 <div className="contact-detail-page">
@@ -105,8 +108,8 @@ export class _ContactDetailsPage extends Component {
                     </div>
 
                     <div className="paging">
-                        <Link to={'/contact/details/' + contact.neighborContacts.prev}>← Prev</Link>
-                        <Link to={'/contact/details/' + contact.neighborContacts.next}>Next →</Link>
+                        <Link to={'/contact/details/' + contact.prevContact}>← Prev</Link>
+                        <Link to={'/contact/details/' + contact.nextContact}>Next →</Link>
                     </div>
                 </div>
             )

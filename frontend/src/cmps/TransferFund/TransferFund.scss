@@ -1,4 +1,5 @@
 @import '../../scss/variables.scss';
+@import '../../scss/mixins.scss';
 
 .transfer-fund {
     .transfer-info{
@@ -17,8 +18,6 @@
             width:100%;
         }
         input{
-            // min-width:100px;
-            // min-width:200px;
             flex-grow: 1;
         }
         .btn{
@@ -26,6 +25,17 @@
         }
         >*:not(:last-child){
             margin-bottom: 20px;
+        }
+    }
+    @include for-mobile-layout {
+        .transfer-info{
+            label{
+                margin-inline-end: 0;
+            }
+            input{
+                flex-grow:unset;
+                width: 165px;
+            }
         }
     }
 

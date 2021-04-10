@@ -19,7 +19,6 @@ export class _SignupPage extends Component {
         await this.props.saveUser(this.state.userName);
         this.setState({ userName:null});
         this.props.history.push('/')
-        console.log(this.props.user)
     }
     get isGrey(){
         return this.state.userName? '':'grey ';
@@ -27,7 +26,7 @@ export class _SignupPage extends Component {
 
     render() {
         return (
-            <div>
+            <div className="signup-page">
                 <h2>Please signup</h2>
                 <label htmlFor="">User name: <input type="text" onChange={this.onHandleChange}/></label>
                 <button onClick={this.onSaveUSer} className={this.isGrey+'btn standard'}>Save</button>
