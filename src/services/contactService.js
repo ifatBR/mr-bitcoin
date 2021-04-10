@@ -11,7 +11,7 @@ export default {
 const contacts = [
   {
     "_id": "5a56640269f443a5d64b32ca",
-    "name": "Ochoa Hyde",
+    "name": "Mary Hyde",
     "email": "ochoahyde@renovize.com",
     "phone": "+1 (968) 593-3824"
   },
@@ -28,7 +28,7 @@ const contacts = [
     "phone": "+1 (958) 502-3495"
   },
   {
-    "_id": "5a566402ed1cf349f0b47b4d",
+    "_id": "5a566402ed1cf349f0b47b2d",
     "name": "Rachel Lowe",
     "email": "rachellowe@renovize.com",
     "phone": "+1 (911) 475-2312"
@@ -58,13 +58,13 @@ const contacts = [
     "phone": "+1 (989) 503-2663"
   },
   {
-    "_id": "5a566402e3b846c5f6aec652",
+    "_id": "5a566422e3e846c5f6aec652",
     "name": "Rosanne Shelton",
     "email": "rosanneshelton@renovize.com",
     "phone": "+1 (968) 454-3851"
   },
   {
-    "_id": "5a56640272c7dcdf59c3d411",
+    "_id": "8t56240772c2dcdf55c1d481",
     "name": "Pamela Nolan",
     "email": "pamelanolan@renovize.com",
     "phone": "+1 (986) 545-2166"
@@ -108,7 +108,7 @@ const contacts = [
   },
   {
     "_id": "5a56640298500fead8cb1ee5",
-    "name": "Grace James",
+    "name": "Garry James",
     "email": "gracejames@renovize.com",
     "phone": "+1 (959) 525-2529"
   },
