@@ -1,19 +1,22 @@
 import { Component } from 'react';
 import contactService from '../../services/contactService';
 import './ContactEditPage.scss';
-
-export class ContactEditPage extends Component {
+import { connect } from 'react-redux';
+import {loadContact, saveContact } from '../../store/actions/contactActions';
+export class _ContactEditPage extends Component {
     state = {
         contact: null,
     };
     componentDidMount() {
-        if (this.props.match.params.id) this.setContact();
+        if (this.props.match.params.id) this.setContact(this.props.match.params.id);
         else this.setState({ contact: contactService.getEmptyContact() });
     }
 
-    setContact = async () => {
+    setContact = async (id) => {
         try{
-            this.setState({ contact: await contactService.getContactById(this.props.match.params.id) });
+            await this.props.loadContact(id)
+            const contact = {...this.props.contact};
+            this.setState({ contact});
         }catch(err){
             this.props.setErrMsg('Could not load contact details')
         }
@@ -27,12 +30,8 @@ export class ContactEditPage extends Component {
 
     onSaveContact = (ev) => {
         ev.preventDefault();
-        contactService.saveContact(this.state.contact);
-        this.props.history.push(this.props.match.params.id? '/contact/'+this.props.match.params.id: '/contact/')
-    };
-
-    onCloseContact = () => {
-        
+        this.props.saveContact(this.state.contact);
+        this.props.history.push(this.props.match.params.id? '/contact/details/'+this.props.match.params.id: '/contact/')
     };
 
     render() {
@@ -61,3 +60,18 @@ export class ContactEditPage extends Component {
         );
     }
 }
+
+
+
+const mapStateToProps = (state) => {
+    return {
+        contact: state.contactReducer.contact,
+    };
+};
+
+const mapDispatchToProps = {
+    loadContact,
+    saveContact,
+};
+
+export const ContactEditPage = connect(mapStateToProps, mapDispatchToProps)(_ContactEditPage);

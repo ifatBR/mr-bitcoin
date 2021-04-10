@@ -18,12 +18,11 @@ async function getRate(coins) {
 
 async function getMarketPrice() {
     try {
-        let marketPrice = storageService.load('MarketPrice')
+        let marketPrice = storageService.load('marketPrice')
         if(marketPrice) return Promise.resolve(marketPrice);
         const res = await axios.get('https://api.blockchain.info/charts/market-price?timespan=5months&format=json&cors=true');
         marketPrice = res.data.values.map(({x,y})=> {return {x:(new Date(x*1000).toLocaleDateString(['ban', 'id'])), y:y.toFixed(2)}})
-        storageService.store('MarketPrice', marketPrice)
-
+        storageService.store('marketPrice', marketPrice)
         return marketPrice;
     } catch (err) {
         throw err;

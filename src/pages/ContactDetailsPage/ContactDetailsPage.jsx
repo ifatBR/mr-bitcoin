@@ -1,34 +1,37 @@
 import { Component } from 'react';
-import contactService from '../../services/contactService';
+import { TransferFund } from '../../cmps/TransferFund';
 import { Msg } from '../../cmps/Msg';
 import { Link } from 'react-router-dom';
-
+import { connect } from 'react-redux';
+import { loadContact, removeContact } from '../../store/actions/contactActions';
+import { transferCoins } from '../../store/actions/userActions';
+import { MoveList } from '../../cmps/MoveList';
 import './ContactDetailsPage.scss';
 
-export class ContactDetailsPage extends Component {
+export class _ContactDetailsPage extends Component {
     state = {
-        contact: null,
         isShowMsg: false,
+        amount: 0,
+        moves:null
     };
 
     componentDidMount() {
-        this.loadContact();
+        console.log('details too!');
+        this.props.loadContact(this.props.match.params.id);
+        this.setMoves();
     }
-    componentDidUpdate(prevProps){
+    async componentDidUpdate(prevProps) {
+        if (prevProps.match.params.id === this.props.match.params.id) return;
+        await this.props.loadContact(this.props.match.params.id);
+        this.setMoves();
+    }
 
-        if(prevProps.match.params.id===this.props.match.params.id) return
-        console.log('prevProps:', prevProps)
-        this.loadContact();
+    setMoves=()=> {
+        const { user, contact } = this.props;
+        const moves = user.moves.filter((move) => move.toId === contact._id);
+        this.setState({moves});
     }
 
-    loadContact = async()=>{
-        try{
-            const contact = await contactService.getContactById(this.props.match.params.id);
-            this.setState({ contact });
-        }catch(err){
-            this.props.setErrMsg('Could not load contact details')
-        }
-    }
     onShowMsg = () => {
         this.setState({ isShowMsg: true });
     };
@@ -36,51 +39,92 @@ export class ContactDetailsPage extends Component {
         this.setState({ isShowMsg: false });
     };
     onRemoveContact = () => {
-        contactService.deleteContact(this.state.contact._id);
+        this.props.removeContact(this.props.contact._id);
         this.props.history.push('/contact');
         this.onHideMsg();
     };
+
+    onBack = () => {
+        this.props.history.push('/contact');
+    };
+
+    onSetAmount = (amount) => {
+        this.setState({ amount });
+    };
+
+    onTransferCoins = () => {
+        console.log('transfering');
+        this.props.transferCoins(this.state.amount);
+        this.setMoves();
+        this.setState({amount:0})
+    };
+
+   
     render() {
-        const { contact, isShowMsg } = this.state;
+        const { isShowMsg, amount } = this.state;
+        const { contact } = this.props;
         return (
             contact && (
                 <div className="contact-detail-page">
-                    <button onClick={() => this.props.history.push('/contact')} className="btn standard back">
+                    <button onClick={this.onBack} className="btn standard back">
                         ← Back
                     </button>
-                <div className="contact-detail-container">
-                    <div className="contact-info">
-                        <img src={`https://i.pravatar.cc/150?u=${contact._id}`} alt="" />
-                        <h2>{contact.name}</h2>
-                        <h3>{contact.phone}</h3>
-                        <h3>{contact.email}</h3>
+                    <div className="contact-main-container">
+                        <div className="contact-detail-container">
+                            <div className="contact-info">
+                                <img src={`https://i.pravatar.cc/150?u=${contact._id}`} alt="" />
+                                <h2>{contact.name}</h2>
+                                <h3>{contact.phone}</h3>
+                                <h3>{contact.email}</h3>
+                            </div>
+                            <div className="btn-container">
+                                <button onClick={this.onShowMsg} className="btn alert">
+                                    Delete
+                                </button>
+                                <Link to={'/contact/edit/' + contact._id} className="btn standard">
+                                    Edit
+                                </Link>
+                            </div>
+                        </div>
+
+                        {isShowMsg && (
+                            <Msg onHideMsg={this.onHideMsg}>
+                                <p>Are you sure you want to delete this contact?</p>
+                                <button className="btn standard" onClick={this.onRemoveContact}>
+                                    Yes
+                                </button>
+                                <button onClick={this.onHideMsg} className="btn alert">
+                                    No
+                                </button>
+                            </Msg>
+                        )}
+                    <div className="transfer-container">
+                        <TransferFund contact={contact} amount={amount} onSetAmount={this.onSetAmount} onTransferCoins={this.onTransferCoins} />
+                        <MoveList moves={this.state.moves} />
                     </div>
-                    <div className="btn-container">
-                        <button onClick={this.onShowMsg} className="btn alert">
-                            Delete
-                        </button>
-                        <Link to={'/contact/edit/' + contact._id} className="btn standard">
-                            Edit
-                        </Link>
                     </div>
-                    </div>
-                    {isShowMsg && (
-                        <Msg onHideMsg={this.onHideMsg}>
-                            <p>Are you sure you want to delete this contact?</p>
-                            <button className="btn standard" onClick={this.onRemoveContact}>
-                                Yes
-                            </button>
-                            <button onClick={this.onHideMsg} className="btn alert">
-                                No
-                            </button>
-                        </Msg>
-                    )}
+
                     <div className="paging">
-                        <Link to={'/contact/'+contact.neighborContacts.prev}>← Prev</Link>
-                        <Link to={'/contact/'+contact.neighborContacts.next}>Next →</Link>
+                        <Link to={'/contact/details/' + contact.neighborContacts.prev}>← Prev</Link>
+                        <Link to={'/contact/details/' + contact.neighborContacts.next}>Next →</Link>
                     </div>
                 </div>
             )
         );
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        contact: state.contactReducer.contact,
+        user: state.userReducer.user,
+    };
+};
+
+const mapDispatchToProps = {
+    loadContact,
+    removeContact,
+    transferCoins,
+};
+
+export const ContactDetailsPage = connect(mapStateToProps, mapDispatchToProps)(_ContactDetailsPage);

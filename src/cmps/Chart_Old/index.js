@@ -1,1 +1,0 @@
-export { ChartOld } from './ChartOld'

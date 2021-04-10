@@ -169,6 +169,37 @@ function deleteContact(id) {
     resolve(contacts)
   })
 }
+
+function saveContact(contact) {
+  return contact._id ? _updateContact(contact) : _addContact(contact)
+}
+
+function getEmptyContact() {
+  return {
+    name: '',
+    email: '',
+    phone: ''
+  }
+}
+
+function filter(term) {
+  term = term.toLocaleLowerCase()
+  return contacts.filter(contact => {
+    return contact.name.toLocaleLowerCase().includes(term) ||
+    contact.phone.toLocaleLowerCase().includes(term) ||
+    contact.email.toLocaleLowerCase().includes(term)
+  })
+}
+
+function _makeId(length = 10) {
+  var txt = ''
+  var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+  for (var i = 0; i < length; i++) {
+    txt += possible.charAt(Math.floor(Math.random() * possible.length))
+  }
+  return txt
+}
+
 function _getNeighborContactIds(contactIdx){
   let prevIdx = contactIdx-1;
   let nextIdx = contactIdx+1;
@@ -193,36 +224,4 @@ function _addContact(contact) {
     contacts.push(contact)
     resolve(contact)
   })
-}
-
-function saveContact(contact) {
-  return contact._id ? _updateContact(contact) : _addContact(contact)
-}
-
-function getEmptyContact() {
-  return {
-    name: '',
-    email: '',
-    phone: ''
-  }
-}
-
-function filter(term) {
-  term = term.toLocaleLowerCase()
-  return contacts.filter(contact => {
-    return contact.name.toLocaleLowerCase().includes(term) ||
-      contact.phone.toLocaleLowerCase().includes(term) ||
-      contact.email.toLocaleLowerCase().includes(term)
-  })
-}
-
-
-
-function _makeId(length = 10) {
-  var txt = ''
-  var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-  for (var i = 0; i < length; i++) {
-    txt += possible.charAt(Math.floor(Math.random() * possible.length))
-  }
-  return txt
 }

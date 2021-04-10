@@ -1,49 +1,55 @@
-import contactService from '../../services/contactService';
 import { Component } from 'react';
 import { ContactList } from '../../cmps/ContactList';
 import { ContactDetailsPage } from '../ContactDetailsPage';
 import { ContactEditPage } from '../ContactEditPage';
 import { Route } from 'react-router';
 import './ContactPage.scss';
-
-export class ContactPage extends Component {
+import { connect } from 'react-redux';
+import { loadContacts } from '../../store/actions/contactActions';
+export class _ContactPage extends Component {
     state = {
-        // contacts: null,
-        errMsg:null
+        errMsg: null,
+    };
+    componentDidMount() {
+        this.props.loadContacts();
+    }
+
+    onChangeFilter = (filter) => {
+        this.props.loadContacts(filter);
     };
 
-    componentDidMount() {
-        // this.loadContacts();
-    }
+    setErrMsg = (errMsg) => {
+        this.setState({ errMsg });
+        setTimeout(this.setState({ errMsg: null }), 1000);
+    };
 
-    // loadContacts = async (filter = null) => {
-    //     try{
-
-    //         const contacts = await contactService.getContacts(filter);
-    //         this.setState({ contacts });
-    //     }catch(err){
-    //         this.setState({ errMsg: 'Could not load contacts' })
-    //     }
-    // };
-
-    setErrMsg =(errMsg)=>{
-        this.setState({errMsg})
-        setTimeout(this.setState({errMsg:null}),1000)
-    }
-
-
-    // onChangeFilter = (filter) => {
-    //     this.loadContacts(filter);
-    // };
     render() {
-        const { errMsg} = this.state;
+        const { errMsg } = this.state;
+        const { contacts } = this.props;
         return (
             <div>
                 <Route component={ContactEditPage} setErrMsg={this.setErrMsg} path="/contact/edit/:id?" />
-                <Route exact component={ContactDetailsPage} setErrMsg={this.setErrMsg} path="/contact/:id" />
-                <Route exact component={ContactList} setErrMsg={this.setErrMsg} path="/contact/" />
+                <Route exact component={ContactDetailsPage} setErrMsg={this.setErrMsg} path="/contact/details/:id" />
+                <Route
+                    exact
+                    render={(props) => <ContactList onChangeFilter={this.onChangeFilter} contacts={contacts} {...props} />}
+                    setErrMsg={this.setErrMsg}
+                    path="/contact/"
+                />
                 {errMsg && <p>{this.state.errMsg}</p>}
             </div>
         );
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        contacts: state.contactReducer.contacts,
+    };
+};
+
+const mapDispatchToProps = {
+    loadContacts,
+};
+
+export const ContactPage = connect(mapStateToProps, mapDispatchToProps)(_ContactPage);

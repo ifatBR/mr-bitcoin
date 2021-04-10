@@ -1,30 +1,10 @@
 import { Component } from 'react';
-import bitcoinService from '../../services/bitcoinService';
-import userService from '../../services/userService';
 import './HomePage.scss';
+import { connect } from 'react-redux';
 
-export class HomePage extends Component {
-    state = {
-        user: null,
-        rate: 0,
-        isShowInfo:false
-    };
-
-    componentDidMount() {
-        const user = userService.getUser();
-        this.setState({ user }, () => this.setRate());
-    }
-
-    setRate = async () => {
-        try {
-            const rate = await bitcoinService.getRate(this.state.user.coins);
-            this.setState({ rate });
-        } catch (err) {
-            console.log('error:', err);
-        }
-    };
+export class _HomePage extends Component {
     render() {
-        const { user, rate } = this.state;
+        const { user, rate } = this.props;
         return (
             user && (
                 <div className="home-page">
@@ -43,3 +23,32 @@ export class HomePage extends Component {
         );
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        user: state.userReducer.user,
+        rate:state.userReducer.rate
+    };
+};
+
+
+export const HomePage = connect(mapStateToProps)(_HomePage);
+
+
+
+
+
+// import { connect } from 'react-redux';
+// // import {getUser } from '../../store/actions/userActions';
+
+// const mapStateToProps = (state) => {
+//     return {
+//         user: state.userReducer.user,
+//     };
+// };
+
+// const mapDispatchToProps = {
+//     // getUser,
+// };
+
+// export const HomePage = connect(mapStateToProps, mapDispatchToProps)(_HomePage);
