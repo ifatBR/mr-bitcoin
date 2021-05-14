@@ -14,23 +14,26 @@
     justify-content: space-between;
     height: 55px;
     padding: 0 20px;
+
     &.homepage {
-        background-color: rgba(255, 255, 255, 0.253);
+        background-color: rgba($clr5, 0.253);
 
         .logo,
         .nav-link {
             color: rgb(241, 241, 241);
         }
+
         .logo span {
             color: $clr2;
         }
 
     }
-    
+
     .logo {
         font-family: dosis;
         margin: 0;
-        color: rgb(96, 92, 109);
+        color: $clr6;
+
         span {
             color: $clr2;
         }
@@ -48,7 +51,7 @@
             align-items: center;
             justify-content: center;
             background-color: transparent;
-            color: rgb(96, 92, 109);
+            color: $clr6;
             min-width: 60px;
             text-decoration: none;
             font-size: 1rem;
@@ -59,22 +62,25 @@
                 color: $clr2;
             }
         }
-        .nav-link.home::before{
-            font-family:fa-solid;
-            content:"\f015"
+
+        .nav-link.home::before {
+            font-family: fa-solid;
+            content: "\f015"
         }
-        .nav-link.contact::before{
-            font-family:fa-solid;
-            content:"\f007"  
+
+        .nav-link.contact::before {
+            font-family: fa-solid;
+            content: "\f007"
         }
-        .nav-link.statistic::before{
-            font-family:fa-solid;
-            content:"\f201"
+
+        .nav-link.statistic::before {
+            font-family: fa-solid;
+            content: "\f201"
         }
 
         .active-nav {
-            background-color: rgba(6, 1, 26, 0.6);
-            color: rgb(250, 250, 250);
+            background-color: $clr6;
+            color: $clr5;
         }
 
     }

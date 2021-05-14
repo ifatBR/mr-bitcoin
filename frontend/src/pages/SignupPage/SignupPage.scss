@@ -1,13 +1,15 @@
 @import '../../scss/mixins.scss';
+
 @include for-mobile-layout {
-.signup-page {
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-    label{
-        display:flex;
+    .signup-page {
+        display: flex;
         flex-direction: column;
-        margin-bottom:20px;
+        align-items: center;
+
+        label {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
     }
-}
 }

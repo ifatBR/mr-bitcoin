@@ -2,7 +2,7 @@ import { Component } from 'react';
 import contactService from '../../services/contactService';
 import './ContactEditPage.scss';
 import { connect } from 'react-redux';
-import {loadContact, saveContact } from '../../store/actions/contactActions';
+import { loadContact, saveContact } from '../../store/actions/contactActions';
 export class _ContactEditPage extends Component {
     state = {
         contact: null,
@@ -13,25 +13,25 @@ export class _ContactEditPage extends Component {
     }
 
     setContact = async (id) => {
-        try{
-            await this.props.loadContact(id)
-            const contact = {...this.props.contact};
-            this.setState({ contact});
-        }catch(err){
-            this.props.setErrMsg('Could not load contact details')
+        try {
+            await this.props.loadContact(id);
+            const contact = { ...this.props.contact };
+            this.setState({ contact });
+        } catch (err) {
+            this.props.setErrMsg('Could not load contact details');
         }
     };
 
     onHandleChange = ({ target }) => {
-        const field=target.name;
+        const field = target.name;
         const value = target.value;
-        this.setState({ contact:{...this.state.contact, [field]:value} });
+        this.setState({ contact: { ...this.state.contact, [field]: value } });
     };
 
     onSaveContact = (ev) => {
         ev.preventDefault();
         this.props.saveContact(this.state.contact);
-        this.props.history.push(this.props.match.params.id? '/contact/details/'+this.props.match.params.id: '/contact/')
+        this.props.history.push(this.props.match.params.id ? '/contact/details/' + this.props.match.params.id : '/contact/');
     };
 
     render() {
@@ -39,7 +39,7 @@ export class _ContactEditPage extends Component {
         return (
             contact && (
                 <form onSubmit={this.onSaveContact} className="contact-edit">
-                      <button onClick={()=>this.props.history.goBack()} className="btn standard back">
+                    <button onClick={() => this.props.history.goBack()} className="btn standard back">
                         ← Back
                     </button>
                     <label htmlFor="name">
@@ -60,8 +60,6 @@ export class _ContactEditPage extends Component {
         );
     }
 }
-
-
 
 const mapStateToProps = (state) => {
     return {

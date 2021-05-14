@@ -39,8 +39,7 @@
         width: 100%;
         margin: auto;
         margin-bottom: 30px;
-        border-radius: 3px;
-    }
+        border-radius: 3px;}
 
     .contact-info {
         margin-bottom: 30px;
@@ -64,8 +63,9 @@
     }
 
     @include for-mobile-layout {
-        h3{
-            font-size: 1rem;;
+        h3 {
+            font-size: 1rem;
+            ;
         }
     }
 }

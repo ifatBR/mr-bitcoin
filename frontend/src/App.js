@@ -11,15 +11,6 @@ export class _App extends Component {
     state={
         user:null
     }
-    // componentDidMount() {
-        // const user = this.props.user;
-        // this.setState(user)
-    // }
-    // componentDidUpdate(prevProps, prevState) {
-        // if(prevProps.user === this.props.user) return;
-        // this.setState({user:this.props.user})
-
-    // }
     
     render() {
         const SignedUpRoute = (props) => {

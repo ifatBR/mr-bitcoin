@@ -8,7 +8,6 @@ export class _HomePage extends Component {
         return (
             user && (
                 <div className="home-page">
-                    <div className="background"></div>
                     <div className="user-info">
                         <h2>{user.name}</h2>
                         <h3>

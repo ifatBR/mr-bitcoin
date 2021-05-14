@@ -17,24 +17,28 @@
         gap: 10px;
         width: fit-content;
     }
-    @include for-mobile-layout{
+
+    @include for-mobile-layout {
         width: 300px;
+
         .contact-list {
             grid-template-columns: 300px;
             gap: 10px;
-            margin:auto;
+            margin: auto;
         }
-        .contact-ctrls {    
+
+        .contact-ctrls {
             width: 300px;
-            display:flex;
-            // flex-direction: column;
+            display: flex;
         }
-        .contact-filter{
+
+        .contact-filter {
             width: fit-content;
             text-align: end;
-            input{
+
+            input {
                 width: 150px;
-                margin-top:5px;
+                margin-top: 5px;
             }
         }
     }

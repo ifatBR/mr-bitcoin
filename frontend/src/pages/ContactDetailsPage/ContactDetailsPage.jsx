@@ -12,32 +12,34 @@ export class _ContactDetailsPage extends Component {
     state = {
         isShowMsg: false,
         amount: 0,
-        moves:null
+        moves: null,
     };
 
     async componentDidMount() {
-        console.log('reloading');
         await this.props.loadContact(this.props.match.params.id);
         this.setMoves();
     }
+
     async componentDidUpdate(prevProps) {
         if (prevProps.match.params.id === this.props.match.params.id) return;
         await this.props.loadContact(this.props.match.params.id);
         this.setMoves();
     }
 
-    setMoves=()=> {
+    setMoves = () => {
         const { user, contact } = this.props;
         const moves = user.moves.filter((move) => move.toId === contact._id);
-        this.setState({moves});
-    }
+        this.setState({ moves });
+    };
 
     onShowMsg = () => {
         this.setState({ isShowMsg: true });
     };
+
     onHideMsg = () => {
         this.setState({ isShowMsg: false });
     };
+
     onRemoveContact = () => {
         this.props.removeContact(this.props.contact._id);
         this.props.history.push('/contact');
@@ -53,19 +55,22 @@ export class _ContactDetailsPage extends Component {
     };
 
     onTransferCoins = () => {
-        console.log('transfering');
         this.props.transferCoins(this.state.amount);
         this.setMoves();
-        this.setState({amount:0})
+        this.setState({ amount: 0 });
     };
 
-   
     render() {
         const { isShowMsg, amount } = this.state;
         const { contact } = this.props;
-        if(!contact) return(
-            <img className="loader" src="https://i.pinimg.com/originals/b3/30/0a/b3300a501c0897d36683d6f6d0b000a5.gif" alt="Loading"></img>
-        )
+        if (!contact)
+            return (
+                <img
+                    className="loader"
+                    src="https://i.pinimg.com/originals/b3/30/0a/b3300a501c0897d36683d6f6d0b000a5.gif"
+                    alt="Loading"
+                ></img>
+            );
         return (
             contact && (
                 <div className="contact-detail-page">
@@ -101,10 +106,15 @@ export class _ContactDetailsPage extends Component {
                                 </button>
                             </Msg>
                         )}
-                    <div className="transfer-container">
-                        <TransferFund contact={contact} amount={amount} onSetAmount={this.onSetAmount} onTransferCoins={this.onTransferCoins} />
-                        <MoveList moves={this.state.moves} />
-                    </div>
+                        <div className="transfer-container">
+                            <TransferFund
+                                contact={contact}
+                                amount={amount}
+                                onSetAmount={this.onSetAmount}
+                                onTransferCoins={this.onTransferCoins}
+                            />
+                            <MoveList moves={this.state.moves} />
+                        </div>
                     </div>
 
                     <div className="paging">
