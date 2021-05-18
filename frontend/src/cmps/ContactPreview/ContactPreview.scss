@@ -10,9 +10,10 @@
     padding-top: 20px;
     position: relative;
     cursor: pointer;
-
+    transition: background-color 0.2s;
     &:hover {
         box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.1);
+        background-color: darken($clr5, 1%);
 
         img {
             filter: saturate(1);

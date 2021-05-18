@@ -13,7 +13,8 @@ export class _SignupPage extends Component {
         const userName = target.value;
         this.setState({ userName });
     };
-    onSaveUSer = async () => {
+    onSaveUSer = async (ev) => {
+        ev.preventDefault();
         if (!this.state.userName) return;
         await this.props.saveUser(this.state.userName);
         this.setState({ userName: null });

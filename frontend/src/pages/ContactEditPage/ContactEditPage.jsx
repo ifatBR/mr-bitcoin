@@ -7,6 +7,7 @@ export class _ContactEditPage extends Component {
     state = {
         contact: null,
     };
+    
     componentDidMount() {
         if (this.props.match.params.id) this.setContact(this.props.match.params.id);
         else this.setState({ contact: contactService.getEmptyContact() });
